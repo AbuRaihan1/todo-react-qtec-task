@@ -1,57 +1,64 @@
-import React, { useState } from "react";
-import Modal from "./Modal";
-import TodoList from "./TodoList";
+import React from "react";
 
-const TodoForm = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleTodoFormSubmit = (e) => {
-    e.preventDefault()
-  };
-
+const TodoForm = ({
+  handleCreateTodo,
+  setTitle,
+  setDescription,
+  priority,
+  handlePriorityChange,
+  addTask,
+}) => {
   return (
-    <div className="container m-auto">
-      <form
-        onSubmit={handleTodoFormSubmit}
-        className="border p-6 mt-10 rounded-lg"
+    <form className="mt-10" onSubmit={handleCreateTodo}>
+      <div className="mb-3">
+        <label className="text-lg block mb-2">Title</label>
+        <input
+          onBlur={(e) => setTitle(e.target.value)}
+          required
+          type="text"
+          placeholder="Title"
+          name="title"
+          className="border-2 rounded-md p-1 w-full focus:border-orange-500 outline-none text-lg transition ease-in-out delay-100"
+        />
+      </div>
+
+      <div>
+        <label className="text-lg block mb-2">Description</label>
+        <textarea
+          onBlur={(e) => setDescription(e.target.value)}
+          required
+          type="text"
+          placeholder="Description"
+          name="description"
+          className="border-2 rounded-md p-1 w-full focus:border-orange-500 outline-none h-[100px] text-lg transition ease-in-out delay-100"
+        />
+      </div>
+
+      <select
+        className="block w-full px-4 py-2 mt-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-orange-500 focus:ring focus:ring-orange-500"
+        value={priority}
+        required
+        onChange={handlePriorityChange}
       >
-        <h2 className="text-center font-bold text-2xl">Create your todo</h2>
+        <option value="select">Select Priority</option>
+        <option value="Low" className="text-green-600 font-bold">
+          Low
+        </option>
+        <option value="Medium" className="text-yellow-600 font-bold">
+          Medium
+        </option>
+        <option value="High" className="text-red-600 font-bold">
+          High
+        </option>
+      </select>
 
-        <div className="flex md:justify-between md:flex-row flex-col items-center mt-10  gap-5">
-          <h2 className="text-3xl font-bold text-blue-500">Your task</h2>
-          <input
-            type="text"
-            placeholder="search your todo"
-            className="outline-none border-2 rounded-lg px-3 focus:border-orange-500 py-2 lg:w-[450px] w-[280px]"
-          />
-          <div className="flex gap-3">
-            <button
-              onClick={openModal}
-              className=" bg-orange-600 text-white rounded-full px-5 py-2 hover:bg-orange-700 font-semibold"
-            >
-              Add task
-            </button>
-            <button className=" bg-red-600 text-white rounded-full px-5 py-2 hover:bg-red-700 font-semibold">
-              Delete All
-            </button>
-          </div>
-        </div>
-
-        <Modal closeModal={closeModal} isModalOpen={isModalOpen} />
-
-        <div className="todo-table">
-          <TodoList />
-        </div>
-      </form>
-    </div>
+      <button
+        type="submit"
+        className="mt-5 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded w-full"
+      >
+        Create Task
+      </button>
+    </form>
   );
 };
 

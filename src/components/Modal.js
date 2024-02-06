@@ -1,7 +1,21 @@
 import React from "react";
 import closeBtn from "../../src/images/close-window.png";
+import TodoForm from "./TodoForm";
 
-const Modal = ({ closeModal, isModalOpen }) => {
+const Modal = ({
+  closeModal,
+  isModalOpen,
+  handleCreateTodo,
+  handlePriorityChange,
+  description,
+  setDescription,
+  title,
+  setTitle,
+  priority,
+  setPriority,
+  addTask,
+  setAddTask,
+}) => {
   return (
     <>
       {isModalOpen && (
@@ -14,49 +28,18 @@ const Modal = ({ closeModal, isModalOpen }) => {
               className="cursor-pointer p-1 bg-gray-200 rounded-full hover:bg-gray-300 absolute right-3 top-3"
             />
 
-            <div className="mt-10">
-              <div className="mb-3">
-                <label className="text-lg block mb-2">Title</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="Title"
-                  className="border-2 rounded-md p-1 w-full focus:border-orange-500 outline-none text-lg transition ease-in-out delay-100"
-                />
-              </div>
-
-              <div>
-                <label className="text-lg block mb-2">Description</label>
-                <textarea
-                  required
-                  type="text"
-                  placeholder="Description"
-                  className="border-2 rounded-md p-1 w-full focus:border-orange-500 outline-none h-[100px] text-lg transition ease-in-out delay-100"
-                />
-              </div>
-
-              <select
-                className="block w-full px-4 py-2 mt-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-orange-500 focus:ring focus:ring-orange-500"
-                required
-              >
-                <option value="select" disabled selected>
-                  Select Priority
-                </option>
-                <option value="Low" className="text-green-600 font-bold">
-                  Low
-                </option>
-                <option value="Medium" className="text-yellow-600 font-bold">
-                  Medium
-                </option>
-                <option value="High" className="text-red-600 font-bold">
-                  High
-                </option>
-              </select>
-
-              <button className="mt-5 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded w-full">
-                Create Task
-              </button>
-            </div>
+            <TodoForm
+              handleCreateTodo={handleCreateTodo}
+              handlePriorityChange={handlePriorityChange}
+              description={description}
+              setDescription={setDescription}
+              title={title}
+              setTitle={setTitle}
+              priority={priority}
+              setPriority={setPriority}
+              addTask={addTask}
+              setAddTask={setAddTask}
+            />
           </div>
         </div>
       )}
