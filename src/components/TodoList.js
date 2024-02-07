@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
-const TodoList = ({ addTask, deleteSingleTask }) => {
+const TodoList = ({
+  addTask,
+  deleteSingleTask,
+  editSingleTask,
+  setAddTask,
+}) => {
   const [taskStatus, setTaskStatus] = useState(false);
   const taskStatusHandler = () => {
     if (!taskStatus) {
       setTaskStatus(true);
     }
   };
+
+  // get item from localStorage
+  useEffect(() => {
+    const savedTasks = JSON.parse(localStorage.getItem("tasks"));
+    if (savedTasks) {
+      setAddTask(savedTasks);
+    }
+  }, []);
+  
   return (
     <div>
       {addTask.length ? (
@@ -56,7 +70,10 @@ const TodoList = ({ addTask, deleteSingleTask }) => {
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap flex gap-3">
-                    <button className="bg-blue-500 px-2 text-white rounded-sm hover:bg-blue-600">
+                    <button
+                      onClick={() => editSingleTask(idx)}
+                      className="bg-blue-500 px-2 text-white rounded-sm hover:bg-blue-600"
+                    >
                       Edit
                     </button>
                     <button

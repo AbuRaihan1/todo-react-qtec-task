@@ -22,6 +22,7 @@ const Home = () => {
     setPriority(e.target.value);
   };
 
+  // set task in localStorage
   const handleCreateTodo = (e) => {
     e.preventDefault();
     const taskData = {
@@ -32,11 +33,12 @@ const Home = () => {
 
     setAddTask((prevTasks) => {
       const updatedTasks = [...prevTasks, taskData];
+      // set task in localStorage
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       return updatedTasks;
     });
 
     Swal.fire("Done", "You have created a task", "success");
-
     closeModal();
   };
 
@@ -77,6 +79,9 @@ const Home = () => {
     });
   };
 
+  const editSingleTask = (idx) => {
+    openModal();
+  };
   return (
     <div className="container m-auto">
       <div className="border p-6 mt-10 rounded-lg">
@@ -123,7 +128,12 @@ const Home = () => {
           setAddTask={setAddTask}
         />
         <div className="todo-table">
-          <TodoList addTask={addTask} deleteSingleTask={deleteSingleTask} />
+          <TodoList
+            addTask={addTask}
+            deleteSingleTask={deleteSingleTask}
+            editSingleTask={editSingleTask}
+            setAddTask={setAddTask}
+          />
         </div>
       </div>
     </div>
