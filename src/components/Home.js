@@ -72,8 +72,14 @@ const Home = () => {
       cancelButtonText: "No",
     }).then((result) => {
       if (result.isConfirmed) {
-        const updatedTasks = addTask.filter((task, index) => index !== idx);
-        setAddTask(updatedTasks);
+        const getTaskFromLocalStorage = JSON.parse(
+          localStorage.getItem("tasks")
+        );
+        console.log(getTaskFromLocalStorage);
+        const updatedTasks = getTaskFromLocalStorage.filter(
+          (task, index) => index !== idx
+        );
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
         Swal.fire("Deleted!", " Your task has been deleted", "success");
       }
     });
