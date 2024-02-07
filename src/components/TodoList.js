@@ -1,9 +1,14 @@
-import React from "react";
-import TodoItem from "./TodoItem";
-
+import React, { useState } from "react";
+import "../App.css";
 const TodoList = ({ addTask }) => {
+  const [taskStatus, setTaskStatus] = useState(false);
+  const taskStatusHandler = () => {
+    if (!taskStatus) {
+      setTaskStatus(true);
+    }
+  };
   return (
-    <div>
+    <div className="mt-10 overflow-x-auto overflow-y-hidden scrollbar">
       <table className="table-auto min-w-full divide-y divide-gray-200">
         <thead>
           <tr>
@@ -25,14 +30,27 @@ const TodoList = ({ addTask }) => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {addTask.map((task) => (
-            <tr key={task.id}>
+          {addTask.map((task, idx) => (
+            <tr key={idx}>
               <td className="px-6 py-4 whitespace-nowrap">{task.title}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 {task.description}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">{task.priority}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{task.status}</td>
+              <td
+                onClick={taskStatusHandler}
+                className="px-6 py-4 whitespace-nowrap"
+              >
+                {taskStatus ? (
+                  <p className="bg-green-500 inline text-white rounded-md px-2 pb-1 text-sm">
+                    Complete
+                  </p>
+                ) : (
+                  <p className="text-white inline bg-yellow-400 rounded-md px-2 pb-1 text-sm">
+                    Incomplete
+                  </p>
+                )}
+              </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <button className="text-indigo-600 hover:text-indigo-900">
                   Edit
@@ -45,12 +63,6 @@ const TodoList = ({ addTask }) => {
           ))}
         </tbody>
       </table>
-
-      <div className="task-data border">
-        {addTask?.map((task, idx) => (
-          <TodoItem task={task} key={idx} />
-        ))}
-      </div>
     </div>
   );
 };
