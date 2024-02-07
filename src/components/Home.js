@@ -5,6 +5,10 @@ import TodoList from "./TodoList";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [addTask, setAddTask] = useState([]);
+  const [priority, setPriority] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -13,11 +17,6 @@ const Home = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  const [addTask, setAddTask] = useState([]);
-  const [priority, setPriority] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
 
   const handlePriorityChange = (e) => {
     setPriority(e.target.value);
@@ -59,6 +58,23 @@ const Home = () => {
         }
       });
     }
+  };
+
+  const deleteSingleTask = (idx) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "If you click Yes, your task will be deleted.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const updatedTasks = addTask.filter((task, index) => index !== idx);
+        setAddTask(updatedTasks);
+        Swal.fire("Deleted!", " Your task has been deleted", "success");
+      }
+    });
   };
 
   return (
@@ -107,7 +123,7 @@ const Home = () => {
           setAddTask={setAddTask}
         />
         <div className="todo-table">
-          <TodoList addTask={addTask} />
+          <TodoList addTask={addTask} deleteSingleTask={deleteSingleTask} />
         </div>
       </div>
     </div>
