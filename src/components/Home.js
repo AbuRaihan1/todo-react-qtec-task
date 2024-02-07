@@ -35,6 +35,10 @@ const Home = () => {
       const updatedTasks = [...prevTasks, taskData];
       return updatedTasks;
     });
+
+    Swal.fire("Done", "You have created a task", "success");
+
+    closeModal();
   };
 
   const deleteAllTask = () => {
@@ -60,7 +64,7 @@ const Home = () => {
   return (
     <div className="container m-auto">
       <div className="border p-6 mt-10 rounded-lg">
-        <h2 className="text-center font-bold text-2xl">Create your todo</h2>
+        {/* <h2 className="text-center font-bold text-2xl">Create your todo</h2> */}
 
         <div className="flex md:justify-between md:flex-row flex-col items-center mt-10  gap-5">
           <h2 className="text-3xl font-bold text-blue-500">Your task</h2>
@@ -90,6 +94,7 @@ const Home = () => {
         <Modal
           closeModal={closeModal}
           isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
           handleCreateTodo={handleCreateTodo}
           handlePriorityChange={handlePriorityChange}
           description={description}

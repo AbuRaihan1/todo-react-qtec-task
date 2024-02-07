@@ -7,7 +7,12 @@ const TodoForm = ({
   priority,
   handlePriorityChange,
   addTask,
+  closeModal,
+  isModalOpen,
+  setIsModalOpen,
 }) => {
+  const closeModalAfterCreateTask = () => {};
+
   return (
     <form className="mt-10" onSubmit={handleCreateTodo}>
       <div className="mb-3">
@@ -54,7 +59,6 @@ const TodoForm = ({
 
       <button
         type="submit"
-        
         className="mt-5 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded w-full"
       >
         Create Task

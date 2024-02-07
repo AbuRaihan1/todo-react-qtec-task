@@ -5,6 +5,7 @@ import TodoForm from "./TodoForm";
 const Modal = ({
   closeModal,
   isModalOpen,
+  setIsModalOpen,
   handleCreateTodo,
   handlePriorityChange,
   description,
@@ -39,6 +40,9 @@ const Modal = ({
               setPriority={setPriority}
               addTask={addTask}
               setAddTask={setAddTask}
+              closeModal={closeModal}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
             />
           </div>
         </div>
