@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import Modal from "./Modal";
 import TodoList from "./TodoList";
 
@@ -36,6 +37,26 @@ const Home = () => {
     });
   };
 
+  const deleteAllTask = () => {
+    if (addTask.length === 0) {
+      Swal.fire("Empty Task", "You Have no task to delete", "warning");
+    } else {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "If you click Yes, all tasks will be deleted.",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setAddTask([]);
+          Swal.fire("Deleted!", "All tasks have been deleted.", "success");
+        }
+      });
+    }
+  };
+
   return (
     <div className="container m-auto">
       <div className="border p-6 mt-10 rounded-lg">
@@ -55,7 +76,12 @@ const Home = () => {
             >
               Add task
             </button>
-            <button className=" bg-red-600 text-white rounded-full px-5 py-2 hover:bg-red-700 font-semibold">
+
+            <button
+              onClick={deleteAllTask}
+              className=" bg-red-600 text-white rounded-full px-5 py-2 hover:bg-red-700 font-semibold"
+            >
+              {" "}
               Delete All
             </button>
           </div>
