@@ -10,14 +10,17 @@ const TodoForm = ({
   closeModal,
   isModalOpen,
   setIsModalOpen,
+  setEditedTask,
+  editedTask,
 }) => {
-  const closeModalAfterCreateTask = () => {};
-
   return (
     <form className="mt-10" onSubmit={handleCreateTodo}>
       <div className="mb-3">
         <label className="text-lg block mb-2">Title</label>
         <input
+          onChange={(e) =>
+            setEditedTask({ ...editedTask, title: e.target.value })
+          }
           onBlur={(e) => setTitle(e.target.value)}
           required
           type="text"
@@ -30,6 +33,9 @@ const TodoForm = ({
       <div>
         <label className="text-lg block mb-2">Description</label>
         <textarea
+          onChange={(e) =>
+            setEditedTask({ ...editedTask, description: e.target.value })
+          }
           onBlur={(e) => setDescription(e.target.value)}
           required
           type="text"

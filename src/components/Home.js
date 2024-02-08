@@ -9,6 +9,7 @@ const Home = () => {
   const [priority, setPriority] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [editedTask, setEditedTask] = useState(null);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -33,11 +34,9 @@ const Home = () => {
 
     setAddTask((prevTasks) => {
       const updatedTasks = [...prevTasks, taskData];
-      // set task in localStorage
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       return updatedTasks;
     });
-
     Swal.fire("Done", "You have created a task", "success");
     closeModal();
   };
@@ -90,6 +89,8 @@ const Home = () => {
 
   const editSingleTask = (idx) => {
     openModal();
+    console.log(idx);
+    console.log(editedTask);
   };
   return (
     <div className="container m-auto">
@@ -135,6 +136,8 @@ const Home = () => {
           setPriority={setPriority}
           addTask={addTask}
           setAddTask={setAddTask}
+          editedTask={editedTask}
+          setEditedTask={setEditedTask}
         />
         <div className="todo-table">
           <TodoList

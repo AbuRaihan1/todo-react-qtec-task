@@ -16,6 +16,8 @@ const Modal = ({
   setPriority,
   addTask,
   setAddTask,
+  editedTask,
+  setEditedTask,
 }) => {
   return (
     <>
@@ -31,18 +33,26 @@ const Modal = ({
 
             <TodoForm
               handleCreateTodo={handleCreateTodo}
-              handlePriorityChange={handlePriorityChange}
+              // description
               description={description}
               setDescription={setDescription}
+              // title
               title={title}
               setTitle={setTitle}
+              // priority
               priority={priority}
               setPriority={setPriority}
+              handlePriorityChange={handlePriorityChange}
+              // add task
               addTask={addTask}
               setAddTask={setAddTask}
+              // modal
               closeModal={closeModal}
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
+              // edit task
+              editedTask={editedTask}
+              setEditedTask={setEditedTask}
             />
           </div>
         </div>
