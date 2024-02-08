@@ -14,6 +14,7 @@ const TodoList = ({
   };
 
   // get item from localStorage
+
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem("tasks"));
     if (savedTasks) {

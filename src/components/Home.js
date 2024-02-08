@@ -79,6 +79,9 @@ const Home = () => {
         const updatedTasks = getTaskFromLocalStorage.filter(
           (task, index) => index !== idx
         );
+        // Update state with the filtered tasks
+        setAddTask(updatedTasks);
+        // Update localStorage
         localStorage.setItem("tasks", JSON.stringify(updatedTasks));
         Swal.fire("Deleted!", " Your task has been deleted", "success");
       }
