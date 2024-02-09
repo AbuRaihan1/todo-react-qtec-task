@@ -74,7 +74,6 @@ const Home = () => {
         const getTaskFromLocalStorage = JSON.parse(
           localStorage.getItem("tasks")
         );
-        console.log(getTaskFromLocalStorage);
         const updatedTasks = getTaskFromLocalStorage.filter(
           (task, index) => index !== idx
         );
@@ -88,9 +87,9 @@ const Home = () => {
   };
 
   const editSingleTask = (idx) => {
-    openModal();
-    console.log(idx);
-    console.log(editedTask);
+    // openModal();
+    // console.log(idx);
+    // console.log(editedTask);
   };
   return (
     <div className="container m-auto">
@@ -98,11 +97,13 @@ const Home = () => {
         {/* <h2 className="text-center font-bold text-2xl">Create your todo</h2> */}
 
         <div className="flex md:justify-between md:flex-row flex-col items-center mt-10  gap-5">
-          <h2 className="text-3xl font-bold text-blue-500">Your task</h2>
+          <h2 className=" lg:text-3xl md:text-2xl text-3xl font-bold text-orange-600">
+            Your task : {addTask.length}
+          </h2>
           <input
             type="text"
             placeholder="search your todo"
-            className="outline-none border-2 rounded-lg px-3 focus:border-orange-500 py-2 lg:w-[450px] w-[280px]"
+            className="outline-none border-2 rounded-full px-3 focus:border-orange-500 py-2 lg:w-[450px] w-[280px] "
           />
           <div className="flex gap-3">
             <button
