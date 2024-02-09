@@ -7,10 +7,11 @@ const TodoList = ({
   setAddTask,
 }) => {
   const [taskStatus, setTaskStatus] = useState(false);
-  const taskStatusHandler = () => {
+  const taskStatusHandler = (idx) => {
     if (!taskStatus) {
       setTaskStatus(true);
     }
+    console.log(idx);
   };
 
   // get item from localStorage
@@ -65,14 +66,16 @@ const TodoList = ({
                         Complete
                       </p>
                     ) : (
-                      <p className="text-white inline bg-yellow-400 rounded-md px-2 pb-1 text-sm cursor-pointer">
+                      <p
+                        className="text-white inline bg-yellow-400 rounded-md px-2 pb-1 text-sm cursor-pointer"
+                        onClick={() => taskStatusHandler(task)}
+                      >
                         Incomplete
                       </p>
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap flex gap-3">
                     <button
-                      onClick={() => editSingleTask(idx)}
                       className="bg-blue-500 px-2 text-white rounded-sm hover:bg-blue-600"
                     >
                       Edit
