@@ -8,6 +8,17 @@ const TodoList = ({
   taskStatus,
   setTaskStatus,
 }) => {
+  // get item from localStorage
+  useEffect(() => {
+    const savedTasksJSON = localStorage.getItem("tasks");
+    if (savedTasksJSON) {
+      try {
+        const parseJsonData = JSON.parse(savedTasksJSON);
+        setAddTask(parseJsonData);
+      } catch {}
+    }
+  }, []);
+
   const taskStatusHandler = (idx) => {
     const getTaskFromLocalStorage = localStorage.getItem("tasks");
     if (getTaskFromLocalStorage) {
@@ -26,17 +37,6 @@ const TodoList = ({
     }
   };
 
-  // get item from localStorage
-  useEffect(() => {
-    const savedTasksJSON = localStorage.getItem("tasks");
-    if (savedTasksJSON) {
-      try {
-        const parseJsonData = JSON.parse(savedTasksJSON);
-        setAddTask(parseJsonData);
-      } catch {}
-    }
-  }, []);
-
   return (
     <div>
       {addTask?.length ? (
@@ -53,10 +53,16 @@ const TodoList = ({
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Priority
                 </th>
+
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Date
+                </th>
+
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Options
                 </th>
               </tr>
@@ -72,10 +78,9 @@ const TodoList = ({
                     {task.priority}
                   </td>
                   <td
-                    // onClick={taskStatusHandler}
                     className="px-6 py-4 whitespace-nowrap"
                   >
-                    {task.taskStatus ? (
+                    {task?.taskStatus ? (
                       <p className="bg-green-500 inline text-white rounded-md px-2 pb-1 text-sm cursor-not-allowed">
                         Complete
                       </p>
@@ -87,11 +92,12 @@ const TodoList = ({
                         Incomplete
                       </p>
                     )}
-                    {/* <button onClick={() => taskStatusHandler(idx)}>
-                      Incomplete
-                    </button> */}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap flex gap-3">
+
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-500 text-sm">
+                    {task?.formattedDateTime}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap flex gap-3 justify-end">
                     <button className="bg-blue-500 px-2 text-white rounded-sm hover:bg-blue-600">
                       Edit
                     </button>
@@ -108,7 +114,7 @@ const TodoList = ({
           </table>
         </div>
       ) : (
-        <h1 className=" md:text-4xl text-2xl text-center font-bold mt-10">
+        <h1 className=" md:text-4xl text-2xl text-center font-bold mt-12">
           You have no task to show
         </h1>
       )}

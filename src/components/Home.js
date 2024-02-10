@@ -9,9 +9,10 @@ const Home = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("");
-  
+
   const [taskStatus, setTaskStatus] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
+  // const [taskDate, setTaskDate] = useState(null);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -28,11 +29,19 @@ const Home = () => {
   // set task in localStorage
   const handleCreateTodo = (e) => {
     e.preventDefault();
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString(); // Format: "MM/DD/YYYY"
+    const formattedTime = currentDate.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const formattedDateTime = `${formattedTime}, ${formattedDate} `;
     const taskData = {
       title: title,
       description: description,
       priority: priority,
       taskStatus: taskStatus,
+      formattedDateTime: formattedDateTime,
     };
 
     setAddTask((prevTasks) => {
