@@ -10,7 +10,6 @@ const TodoList = ({
 }) => {
   const taskStatusHandler = (idx) => {
     const getTaskFromLocalStorage = localStorage.getItem("tasks");
-
     if (getTaskFromLocalStorage) {
       const parseJsonData = JSON.parse(getTaskFromLocalStorage);
       const updatedTasks = parseJsonData.map((task, index) => {
@@ -23,6 +22,7 @@ const TodoList = ({
         return task;
       });
       setAddTask(updatedTasks);
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     }
   };
 
