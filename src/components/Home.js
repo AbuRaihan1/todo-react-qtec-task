@@ -107,8 +107,6 @@ const Home = () => {
   return (
     <div className="container m-auto">
       <div className="border p-6 mt-10 rounded-lg">
-        {/* <h2 className="text-center font-bold text-2xl">Create your todo</h2> */}
-
         <div className="flex md:justify-between md:flex-row flex-col items-center mt-10  gap-5">
           <h2 className=" lg:text-3xl md:text-2xl text-3xl font-bold text-orange-600">
             Your task : {addTask?.length ? addTask.length : "0"}
