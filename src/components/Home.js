@@ -6,9 +6,11 @@ import TodoList from "./TodoList";
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [addTask, setAddTask] = useState([]);
-  const [priority, setPriority] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("");
+  
+  const [taskStatus, setTaskStatus] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
 
   const openModal = () => {
@@ -30,6 +32,7 @@ const Home = () => {
       title: title,
       description: description,
       priority: priority,
+      taskStatus: taskStatus,
     };
 
     setAddTask((prevTasks) => {
@@ -147,6 +150,8 @@ const Home = () => {
             deleteSingleTask={deleteSingleTask}
             editSingleTask={editSingleTask}
             setAddTask={setAddTask}
+            taskStatus={taskStatus}
+            setTaskStatus={setTaskStatus}
           />
         </div>
       </div>
