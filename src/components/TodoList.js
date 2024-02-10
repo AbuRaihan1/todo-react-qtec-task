@@ -17,15 +17,18 @@ const TodoList = ({
   // get item from localStorage
 
   useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem("tasks"));
-    if (savedTasks) {
-      setAddTask(savedTasks);
+    const savedTasksJSON = localStorage.getItem("tasks");
+    if (savedTasksJSON) {
+      const parseJsonData = JSON.parse(savedTasksJSON);
+      setAddTask(parseJsonData);
+    } else {
+      // console.log("object");
     }
   }, []);
 
   return (
     <div>
-      {addTask.length ? (
+      {addTask?.length ? (
         <div className="mt-10 overflow-x-auto overflow-y-hidden scrollbar">
           <table className="table-auto min-w-full divide-y divide-gray-200">
             <thead>
@@ -48,7 +51,7 @@ const TodoList = ({
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {addTask.map((task, idx) => (
+              {addTask?.map((task, idx) => (
                 <tr key={idx} className="bg-gray-50 border">
                   <td className="px-6 py-4 whitespace-nowrap">{task.title}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -75,9 +78,7 @@ const TodoList = ({
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap flex gap-3">
-                    <button
-                      className="bg-blue-500 px-2 text-white rounded-sm hover:bg-blue-600"
-                    >
+                    <button className="bg-blue-500 px-2 text-white rounded-sm hover:bg-blue-600">
                       Edit
                     </button>
                     <button

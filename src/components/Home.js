@@ -33,7 +33,7 @@ const Home = () => {
     };
 
     setAddTask((prevTasks) => {
-      const updatedTasks = [...prevTasks, taskData];
+      const updatedTasks = [...(prevTasks || []), taskData];
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       return updatedTasks;
     });
@@ -42,7 +42,7 @@ const Home = () => {
   };
 
   const deleteAllTask = () => {
-    if (addTask.length === 0) {
+    if (addTask?.length === 0) {
       Swal.fire("Empty Task", "You Have no task to delete", "warning");
     } else {
       Swal.fire({
@@ -54,7 +54,8 @@ const Home = () => {
         cancelButtonText: "No",
       }).then((result) => {
         if (result.isConfirmed) {
-          setAddTask([]);
+          const removeItem = localStorage.removeItem("tasks");
+          setAddTask(removeItem);
           Swal.fire("Deleted!", "All tasks have been deleted.", "success");
         }
       });
@@ -98,7 +99,7 @@ const Home = () => {
 
         <div className="flex md:justify-between md:flex-row flex-col items-center mt-10  gap-5">
           <h2 className=" lg:text-3xl md:text-2xl text-3xl font-bold text-orange-600">
-            Your task : {addTask.length}
+            Your task : {addTask?.length ? addTask.length : "0"}
           </h2>
           <input
             type="text"
