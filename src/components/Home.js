@@ -12,7 +12,6 @@ const Home = () => {
 
   const [taskStatus, setTaskStatus] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
-  // const [taskDate, setTaskDate] = useState(null);
 
   const openModal = () => {
     setIsModalOpen(true);
